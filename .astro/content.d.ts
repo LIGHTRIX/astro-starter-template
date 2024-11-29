@@ -1,15 +1,19 @@
 declare module 'astro:content' {
 	export interface RenderResult {
 		Content: import('astro/runtime/server/index.js').AstroComponentFactory;
+
 		headings: import('astro').MarkdownHeading[];
+
 		remarkPluginFrontmatter: Record<string, any>;
 	}
+
 	interface Render {
 		'.md': Promise<RenderResult>;
 	}
 
 	export interface RenderedContent {
 		html: string;
+
 		metadata?: {
 			imagePaths: Array<string>;
 			[key: string]: unknown;
@@ -21,12 +25,15 @@ declare module 'astro:content' {
 	type Flatten<T> = T extends { [K: string]: infer U } ? U : never;
 
 	export type CollectionKey = keyof AnyEntryMap;
+
 	export type CollectionEntry<C extends CollectionKey> = Flatten<AnyEntryMap[C]>;
 
 	export type ContentCollectionKey = keyof ContentEntryMap;
+
 	export type DataCollectionKey = keyof DataEntryMap;
 
 	type AllValuesOf<T> = T extends any ? T[keyof T] : never;
+
 	type ValidContentEntrySlug<C extends keyof ContentEntryMap> = AllValuesOf<
 		ContentEntryMap[C]
 	>['slug'];
@@ -53,6 +60,7 @@ declare module 'astro:content' {
 		collection: C,
 		filter?: (entry: CollectionEntry<C>) => entry is E,
 	): Promise<E[]>;
+
 	export function getCollection<C extends keyof AnyEntryMap>(
 		collection: C,
 		filter?: (entry: CollectionEntry<C>) => unknown,
@@ -63,19 +71,23 @@ declare module 'astro:content' {
 		E extends ValidContentEntrySlug<C> | (string & {}),
 	>(entry: {
 		collection: C;
+
 		slug: E;
 	}): E extends ValidContentEntrySlug<C>
 		? Promise<CollectionEntry<C>>
 		: Promise<CollectionEntry<C> | undefined>;
+
 	export function getEntry<
 		C extends keyof DataEntryMap,
 		E extends keyof DataEntryMap[C] | (string & {}),
 	>(entry: {
 		collection: C;
+
 		id: E;
 	}): E extends keyof DataEntryMap[C]
 		? Promise<DataEntryMap[C][E]>
 		: Promise<CollectionEntry<C> | undefined>;
+
 	export function getEntry<
 		C extends keyof ContentEntryMap,
 		E extends ValidContentEntrySlug<C> | (string & {}),
@@ -85,6 +97,7 @@ declare module 'astro:content' {
 	): E extends ValidContentEntrySlug<C>
 		? Promise<CollectionEntry<C>>
 		: Promise<CollectionEntry<C> | undefined>;
+
 	export function getEntry<
 		C extends keyof DataEntryMap,
 		E extends keyof DataEntryMap[C] | (string & {}),
@@ -99,12 +112,15 @@ declare module 'astro:content' {
 	export function getEntries<C extends keyof ContentEntryMap>(
 		entries: {
 			collection: C;
+
 			slug: ValidContentEntrySlug<C>;
 		}[],
 	): Promise<CollectionEntry<C>[]>;
+
 	export function getEntries<C extends keyof DataEntryMap>(
 		entries: {
 			collection: C;
+
 			id: keyof DataEntryMap[C];
 		}[],
 	): Promise<CollectionEntry<C>[]>;
@@ -120,10 +136,12 @@ declare module 'astro:content' {
 		C extends keyof ContentEntryMap
 			? {
 					collection: C;
+
 					slug: ValidContentEntrySlug<C>;
 				}
 			: {
 					collection: C;
+
 					id: keyof DataEntryMap[C];
 				}
 	>;
@@ -135,6 +153,7 @@ declare module 'astro:content' {
 	): import('astro/zod').ZodEffects<import('astro/zod').ZodString, never>;
 
 	type ReturnTypeOrOriginal<T> = T extends (...args: any[]) => infer R ? R : T;
+
 	type InferEntrySchema<C extends keyof AnyEntryMap> = import('astro/zod').infer<
 		ReturnTypeOrOriginal<Required<ContentConfig['collections'][C]>['schema']>
 	>;

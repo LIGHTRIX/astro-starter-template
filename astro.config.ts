@@ -7,7 +7,10 @@ export default (await import("astro/config")).defineConfig({
 	// TODO Place your site URL here
 	// site: "",
 	compressHTML: true,
-	prefetch: true,
+	prefetch: {
+		defaultStrategy: "hover",
+		prefetchAll: true,
+	},
 	server: {
 		port: 9999,
 	},

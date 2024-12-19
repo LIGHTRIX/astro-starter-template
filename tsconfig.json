@@ -14,5 +14,6 @@
 		]
 	},
 	"extends": "@playform/build/tsconfig",
-	"include": ["Source"]
+	"include": ["Source", ".astro/types.d.ts"],
+	"exclude": ["Target"]
 }

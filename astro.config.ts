@@ -42,5 +42,26 @@ export default (await import("astro/config")).defineConfig({
 			devSourcemap: true,
 			transformer: "postcss",
 		},
+		plugins: [
+			{
+				name: "crossorigin",
+				transform(code, id, options) {
+					return code
+						.replace(/<script/g, '<script crossorigin="anonymous"')
+						.replace(
+							/<link[^>]*(?=.*rel="preload")(?=.*href="[^"]*\.js")(?=.*as="script")[^>]*/g,
+							'$& crossorigin="anonymous"',
+						)
+						.replace(
+							/<link[^>]*(?=.*rel="preload")(?=.*as="font")[^>]*/g,
+							'$& crossorigin="anonymous"',
+						)
+						.replace(
+							/<link[^>]*(?=.*rel="stylesheet")(?=.*href="https?:\/\/[^"]*")[^>]*/g,
+							'$& crossorigin="anonymous"',
+						);
+				},
+			},
+		],
 	},
 }) as typeof defineConfig;

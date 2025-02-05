@@ -1,9 +1,9 @@
-const f = "modulepreload",
+const p = "modulepreload",
 	h = function (o) {
 		return "/" + o;
 	},
 	l = {},
-	E = function (u, s, v) {
+	E = function (u, s, y) {
 		let a = Promise.resolve();
 		if (s && s.length > 0) {
 			document.getElementsByTagName("link");
@@ -18,7 +18,7 @@ const f = "modulepreload",
 					if (document.querySelector(`link[href="${t}"]${d}`)) return;
 					const n = document.createElement("link");
 					if (
-						((n.rel = i ? "stylesheet" : f),
+						((n.rel = i ? "stylesheet" : p),
 						i || (n.as = "script"),
 						(n.crossOrigin = ""),
 						(n.href = t),
@@ -26,10 +26,10 @@ const f = "modulepreload",
 						document.head.appendChild(n),
 						i)
 					)
-						return new Promise((m, p) => {
+						return new Promise((m, f) => {
 							n.addEventListener("load", m),
 								n.addEventListener("error", () =>
-									p(
+									f(
 										new Error(
 											`Unable to preload CSS for ${t}`,
 										),
@@ -51,7 +51,7 @@ const f = "modulepreload",
 	};
 (
 	await E(async () => {
-		const { initializeApp: o } = await import("./index.esm.BE6rRU-J.js");
+		const { initializeApp: o } = await import("./index.esm.Cu7LdMsX.js");
 		return { initializeApp: o };
 	}, [])
 ).initializeApp({
@@ -64,4 +64,4 @@ const f = "modulepreload",
 	projectId: "",
 	storageBucket: "",
 });
-//# sourceMappingURL=Base.astro_astro_type_script_index_0_lang.CaK3-TXG.js.map
+//# sourceMappingURL=Base.astro_astro_type_script_index_0_lang.DbHbI_eE.js.map

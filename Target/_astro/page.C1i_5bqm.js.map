@@ -1,1 +1,0 @@
-{"version":3,"file":"page.C1i_5bqm.js","sources":["../../astro:scripts/page.js"],"sourcesContent":["import { init } from 'astro/virtual-modules/prefetch.js';init()"],"names":["init"],"mappings":"mCAAyDA,EAAI"}
